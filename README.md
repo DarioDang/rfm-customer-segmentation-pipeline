@@ -1,1 +1,1 @@
-# rfm-customer-segmentation-pipeline
+# RFM Customer Segmentation Pipeline
