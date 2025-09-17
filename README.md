@@ -20,16 +20,12 @@ This pipeline automates that process:
 
 ```mermaid
 flowchart TD
-    A[Raw Sales Data] -->|01-ingest| B[Postgres: raw.sales_2023_2024]
-    B -->|dbt transforms| C[Staging → Intermediate → Mart RFM Features]
-    C -->|03-model| D[Clustering Model (K-Means)]
-    D --> E[Analytics Tables: customer_clustered_information, dim_customer_clustered, fact_cluster_summary]
-    E -->|BI/Reports| F[Customer Insights]
-
-    subgraph Test Mode
-    X[Synthetic Generator] --> A
-    Y[Test Runner] --> A
-    end
+    A[Ingest Raw Data (KaggleHub → Postgres)] --> B[DBT Transformations]
+    B --> C[Staging Layer]
+    C --> D[Intermediate Layer]
+    D --> E[Marts (RFM Features)]
+    E --> F[Clustering Model (K-Means)]
+    F --> G[Analytics Tables & Dashboards]
 ```
 
 ## 📂 Repository Structure
