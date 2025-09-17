@@ -1,0 +1,7 @@
+01-ingest/ANALYSIS_NOTEBOOK.ipynb
+03-model/mlruns
+03-model/mlflow.db
+.ipynb_checkpoints
+logs
+report
+image
