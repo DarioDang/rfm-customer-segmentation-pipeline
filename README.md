@@ -147,8 +147,6 @@ This validates that the pipeline adapts to incremental unseen data and updates c
 
 ## 📚 Key Learnings & Skills Applied
 
-## 📚 Key Learnings & Skills Applied
-
 | **Category**           | **Skills & Tools**                                                                 |
 |-------------------------|------------------------------------------------------------------------------------|
 | **Data Engineering**    | - Dockerized Postgres + pgAdmin <br> - Automated data ingestion from KaggleHub <br> - Synthetic data generation to simulate real-world pipelines |
@@ -162,13 +160,13 @@ This validates that the pipeline adapts to incremental unseen data and updates c
 ## 📈 Why This Project Matters
 This pipeline demonstrates end-to-end MLOps and data engineering skills:
 
-    - Building data pipelines (ETL → feature store → ML model → analytics).
+- Building data pipelines (ETL → feature store → ML model → analytics).
 
-    - Automating workflows to mimic real production environments.
+- Automating workflows to mimic real production environments.
 
-    - Using industry-standard tools: DBT, Prefect, MLflow, Docker, Postgres.
+- Using industry-standard tools: DBT, Prefect, MLflow, Docker, Postgres.
 
-    - Delivering business value through customer segmentation insights.
+- Delivering business value through customer segmentation insights.
 
 ## 👤 Author
 
