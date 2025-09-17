@@ -16,17 +16,6 @@ This pipeline automates that process:
 4. **Store customer segments** → in Postgres for downstream analytics.  
 5. **Simulate production streaming** → by appending monthly unseen data and re-running the pipeline every cycle.  
 
-## 🏗️ Architecture
-
-```mermaid
-flowchart TD
-    A[Ingest Raw Data (KaggleHub to Postgres)] --> B[DBT Transformations]
-    B --> C[Staging Layer]
-    C --> D[Intermediate Layer]
-    D --> E[Marts (RFM Features)]
-    E --> F[Clustering Model (K-Means)]
-    F --> G[Analytics Tables & Dashboards]
-```
 
 ## 📂 Repository Structure
 
@@ -110,13 +99,13 @@ dbt run
 
 Creates transformations:
 
-    staging → cleaned raw data
+- staging → cleaned raw data
 
-    intermediate → aggregated metrics
+- intermediate → aggregated metrics
 
-    marts → RFM features
+- marts → RFM features
 
-    analytics → clustered outputs ready for BI Analysis
+- analytics → clustered outputs ready for BI Analysis
 
 #### 5. Train Clustering Model
 ```bash
@@ -135,20 +124,20 @@ python customer_segmentation_pipeline.py
 ```
 
 This will:
-    Ingest
-    Run dbt models
-    Train clustering model
-    Update analytics tables
+- Ingest
+- Run dbt models
+- Train clustering model
+- Update analytics tables
 
 ### 🧪 Test Mode (Simulating Production)
 
-To simulate real-world streaming:
+- To simulate real-world streaming:
 
-Every 3 minutes = 1 month
+- Every 3 minutes = 1 month
 
-New synthetic data is appended
+- New synthetic data is appended
 
-Pipeline is re-run automatically
+- Pipeline is re-run automatically
 
 ```bash
 python test/test_synthetic.py
@@ -158,49 +147,17 @@ This validates that the pipeline adapts to incremental unseen data and updates c
 
 ## 📚 Key Learnings & Skills Applied
 
-`Data Engineering`
+## 📚 Key Learnings & Skills Applied
 
-Dockerized Postgres + pgAdmin
+| **Category**           | **Skills & Tools**                                                                 |
+|-------------------------|------------------------------------------------------------------------------------|
+| **Data Engineering**    | - Dockerized Postgres + pgAdmin <br> - Automated data ingestion from KaggleHub <br> - Synthetic data generation to simulate real-world pipelines |
+| **Data Transformation** | - DBT: schema-based transformations (staging → marts → analytics) <br> - Incremental models, schema overrides (public_analytics, public_segmentation) |
+| **Machine Learning**    | - RFM feature engineering <br> - K-Means clustering <br> - Model evaluation with silhouette score <br> - Model and metric tracking with MLflow |
+| **Orchestration**       | - Prefect for pipeline orchestration <br> - Task-based design (ingest, dbt, train, post-analysis) <br> - Scheduled runs simulating production |
+| **Testing & Simulation**| - Synthetic data generator <br> - Automated streaming simulation (`test_synthetic.py`) |
+| **Visualization & BI**  | - Fact & dimension tables prepared for BI dashboards <br> - Indexed Postgres tables for efficient queries |
 
-Automated data ingestion from KaggleHub
-
-Synthetic data generation to simulate real-world pipelines
-
-`Data Transformation`
-
-DBT: schema-based transformations (staging → marts → analytics)
-
-Incremental models, schema overrides (public_analytics, public_segmentation)
-
-`Machine Learning`
-
-RFM feature engineering
-
-K-Means clustering
-
-Model evaluation with silhouette score
-
-Model and metric tracking with MLflow
-
-`Orchestration`
-
-Prefect for pipeline orchestration
-
-Task-based design (ingest, dbt, train, post-analysis)
-
-Scheduled runs simulating production
-
-`Testing & Simulation`
-
-Synthetic data generator
-
-Automated streaming simulation (test_synthetic.py)
-
-`Visualization & BI Ready`
-
-Fact & dimension tables prepared for BI dashboards
-
-Indexed Postgres tables for efficient queries
 
 ## 📈 Why This Project Matters
 This pipeline demonstrates end-to-end MLOps and data engineering skills:
