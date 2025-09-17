@@ -20,7 +20,7 @@ This pipeline automates that process:
 
 ```mermaid
 flowchart TD
-    A[Ingest Raw Data (KaggleHub → Postgres)] --> B[DBT Transformations]
+    A[Ingest Raw Data (KaggleHub to Postgres)] --> B[DBT Transformations]
     B --> C[Staging Layer]
     C --> D[Intermediate Layer]
     D --> E[Marts (RFM Features)]
