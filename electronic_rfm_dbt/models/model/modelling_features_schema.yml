@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: modelling_features
+    description: "Feature set for customer clustering models, derived from mart_rfm_features."
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier."
+        tests:
+          - not_null
+          - unique
+
+      - name: recency_score
+        description: "RFM recency score."
+
+      - name: frequency_score
+        description: "RFM frequency score."
+
+      - name: monetary_score
+        description: "RFM monetary score."
+
+      - name: product_diversity
+        description: "Number of distinct product types purchased by the customer."
+
+      - name: avg_rating
+        description: "Average product rating given by the customer."
+
+      - name: basket_size
+        description: "Average order value per transaction."
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "{{ column_name }} >= 0"
+
+      - name: tenure_days
+        description: "Number of days between first and last purchase."
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "{{ column_name }} >= 0"

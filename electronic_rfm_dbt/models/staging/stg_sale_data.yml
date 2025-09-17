@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_sale_data
+    description: Cleaned sales data from raw source
+    columns:
+      - name: customer_id
+        description: Unique identifier for each customer
+        tests:
+          - not_null
+
+      - name: purchase_date
+        description: Date of customer purchase
+        tests:
+          - not_null
+
+      - name: gender
+        description: Gender category of the customer
+        tests:
+          - accepted_values:
+              values: ['male', 'female', 'other']
+
+      - name: total_price
+        description: Total price of the purchase (should be non-negative)
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0

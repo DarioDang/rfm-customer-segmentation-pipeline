@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: dim_customer_clustered
+    description: "Customer dimension enriched with clustering results."
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+      - name: cluster
+        tests:
+          - not_null

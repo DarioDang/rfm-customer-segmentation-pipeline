@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: int_customer_rfm
+    description: >
+      Intermediate model that calculates RFM (Recency, Frequency, Monetary) metrics
+      per customer based on completed sales data. Includes additional features like 
+      lifecycle span and average order value.
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer.
+        tests:
+          - not_null
+          - unique
+
+      - name: last_purchase_date
+        description: The date of the customer's most recent purchase.
+
+      - name: first_purchase_date
+        description: The date of the customer's first recorded purchase.
+
+      - name: avg_order_value
+        description: The average order value per customer (rounded to 2 decimal places).
+
+      - name: frequency
+        description: Total number of completed purchases made by the customer.
+        tests:
+          - not_null
+
+      - name: monetary
+        description: Total amount spent by the customer across all completed purchases (rounded to 2 decimal places).
+
+      - name: recency_days
+        description: Number of days since the customer's last purchase.
+        tests:
+          - not_null
+
+      - name: lifecycle_days
+        description: Total number of days between the first and last purchase for the customer.

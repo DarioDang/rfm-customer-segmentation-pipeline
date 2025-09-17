@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: mart_rfm_features
+    description: >
+      Extended RFM table with engineered features for clustering and modeling.
+      Includes product diversity, average rating, basket size, and tenure days.
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer."
+        tests:
+          - not_null
+          - unique
+
+      - name: recency_score
+        description: "Recency score (bucketed) calculated from recency_days."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+      - name: frequency_score
+        description: "Frequency score (bucketed)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+      - name: monetary_score
+        description: "Monetary score (bucketed)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+      - name: product_diversity
+        description: "Number of distinct product types purchased by the customer."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "{{ column_name }} >= 0"
+
+      - name: avg_rating
+        description: "Average product rating (0–5) for items purchased by the customer."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "{{ column_name }} >= 0 AND {{ column_name }} <= 5"
+
+      - name: basket_size
+        description: "Average order value per transaction (monetary / frequency)."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "{{ column_name }} >= 0"
+
+      - name: tenure_days
+        description: "Number of days between first and last purchase for the customer."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "{{ column_name }} >= 0"

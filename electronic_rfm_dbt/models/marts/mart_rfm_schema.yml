@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: mart_rfm
+    config:
+      schema: analytics
+    description: >
+      Final RFM (Recency, Frequency, Monetary) segmentation model enriched with loyalty status.
+      This model categorizes customers based on their purchase behavior and helps identify valuable segments like 'Champions', 'Loyal', and 'At Risk'.
+    columns:
+      - name: customer_id
+        description: Unique identifier for each customer.
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: id
+      - name: recency_days
+        description: Number of days since the customer's last purchase.
+        tests:
+          - not_null
+
+      - name: frequency
+        description: Number of completed purchases made by the customer.
+        tests:
+          - not_null
+
+      - name: monetary
+        description: Total spend of the customer, including add-ons.
+        tests:
+          - not_null
+
+      - name: loyalty_member
+        description: Boolean flag indicating if the customer is a loyalty program member.
+        tests:
+          - not_null
+
+      - name: recency_score
+        description: Quantile score (1-5) based on recency_days (lower is better).
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+      - name: frequency_score
+        description: Quantile score (1-5) based on frequency (higher is better).
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+      - name: monetary_score
+        description: Quantile score (1-5) based on monetary value (higher is better).
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+      - name: rfm_total_score
+        description: "Combined RFM score (recency + frequency + monetary), range: 3–15."
+        tests:
+          - not_null
