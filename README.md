@@ -3,6 +3,10 @@
 This project implements a **production-ready customer segmentation pipeline** using RFM (Recency, Frequency, Monetary) analysis, DBT transformations, and ML clustering.  
 It simulates a **real-world retail analytics workflow**: ingesting sales data, transforming with DBT, training clustering models, and serving outputs for analytics.
 
+<p align="center">
+  <img src="cover/RFM_Cover.png" alt="RFM Cover" width="800"/>
+</p>
+
 ---
 
 ## 🚀 Project Overview
